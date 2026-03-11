@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Fetching File') {
             steps {
-               git branch: 'main', url: 'https://github.com/Yash-Singh0408/jenkins-demo.git'
+               git 'https://github.com/Yash-Singh0408/jenkins-demo.git'
             }}
         stage('Build') {
             steps {

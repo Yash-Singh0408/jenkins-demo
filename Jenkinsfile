@@ -1,28 +1,23 @@
 pipeline {
     agent any
     stages {
-        stage('Fetching File') {
-            steps {
-               git branch:'master',url:'https://github.com/Yash-Singh0408/jenkins-demo.git'
-            }}
-        stage('Build') {
-            steps {
-                echo 'Building Project'
-                bat 'javac Hello.java'
-            }}
-        stage('Execute') {
-            steps {
-                echo 'Executing Program'
-                bat 'java Hello'
-            }}
-        stage('Deploy') {
-            steps {
-                echo 'Deploying Project'
-            }}}
-    post {
-        success {
-            echo 'Pipeline executed successfully!'
-        }
-        failure {
-echo 'Pipeline failed'
-}}}
+        stage("Checkout"){
+              steps{
+                git "https://github.com/Yash-Singh0408/jenkins-demo.git"   
+               }
+            }
+
+         stage("Publish"){
+              steps{
+               publishHTML([
+                   allowmissing:true,
+                   alwaysLinktoLastBuild:false,
+                   keepAll:false,
+                   reportDir:'.',
+                   reportFiles:'first.html',
+                   reportName:"Name hai ye"
+               ])
+               }
+            }
+       }
+}
